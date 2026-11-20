@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ExRxAI | Fanghui Xiao</title>
+<meta name="description" content="Case study: ExRxAI, a cardiac rehab system with physician-confirmed prescriptions and on-device rep counting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Fanghui Xiao</a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html#work" aria-current="page">Work</a>
+      <a href="index.html#about">About</a>
+      <a href="research.html">Research</a>
+      <a href="Fanghui_Xiao_Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="case-top">
+    <div class="wrap">
+      <div class="case-intro">
+        <a class="back" href="index.html#work">Back to all work</a>
+        <h1>ExRxAI</h1>
+        <p class="lead">A cardiac rehab system where the software drafts, a physician decides, and the tablet counts only the reps it can verify. No plan reaches a patient without a physician’s sign-off.</p>
+      </div>
+      <aside class="summary" aria-label="Summary">
+        <h2>In 30 seconds</h2>
+        <dl>
+          <dt>Problem</dt><dd>After discharge, patients exercise without feedback, and physicians have little visibility into recovery between visits.</dd>
+          <dt>My role</dt><dd>Product manager and builder: PRD, clinical rules worked out with the partner physician, workflow design, development, testing. About 600 commits across two codebases since June 2026.</dd>
+          <dt>Evidence so far</dt><dd>1,602 automated tests passing. A staged test found three defects; two are fixed on a branch. Counting accuracy isn’t measured yet.</dd>
+          <dt>Built with</dt><dd>Claude Code, Flutter, Google ML Kit, React, Fastify, PostgreSQL</dd>
+          <dt>Status</dt><dd><span class="chip hold">Pre-launch</span> no patient data yet; seeking a hospital pilot partner</dd>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="case-sec">
+    <div class="wrap">
+      <h2>The problem</h2>
+      <div class="prose">
+        <p><strong>Exercise is the medicine in cardiac rehab, and the dose matters:</strong> too little limits the benefit, too much adds risk. After discharge, patients train alone with no feedback on form and no clear rule for when a symptom means stop, while physicians see recovery in fragments and can’t tell who needs them first.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-sec">
+    <div class="wrap">
+      <h2>Who it’s for</h2>
+      <div class="prose">
+        <ul>
+          <li><strong>Patients</strong>, mostly older adults with reduced vision and little tablet experience, who need to know what to do today and that someone will respond if they feel unwell.</li>
+          <li><strong>Physicians</strong>, who need to know whom to look at first and to confirm each plan on evidence. A covering physician has the same rights when the supervisor is away.</li>
+          <li><strong>Researchers</strong>, who work from de-identified records, one row per rehab program.</li>
+        </ul>
+        <figure class="who-map" aria-label="Who sees what in ExRxAI">
+          <div class="wm">
+            <div class="wm-card wm-patient"><b><span class="wm-av" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="15" cy="12" r="5"/><path d="M4.8 28.5a10.2 10.2 0 0 1 20.4 0"/><circle class="badge" cx="24.6" cy="23.6" r="5.6"/><path class="fillc" d="M24.6 26.6l-2.6-2.5a1.5 1.5 0 0 1 2.6-2 1.5 1.5 0 0 1 2.6 2z" stroke-width="0.8"/></svg></span>Patient</b><span>On a tablet. Sees only a plan a physician confirmed.</span></div>
+            <div class="wm-link wm-l">
+              <p class="to-r">Rep counts, quality scores, symptom reports</p>
+              <p class="to-l">Confirmed prescription, pauses</p>
+              <p class="wm-note">Video never leaves the tablet</p>
+            </div>
+            <div class="wm-card wm-server"><b><svg class="wm-ic" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/></svg>ExRxAI server</b><span>Records are append-only. Every read and write is logged.</span></div>
+            <div class="wm-link wm-r">
+              <p class="to-r">Patients sorted by what needs a physician</p>
+              <p class="to-l">Approve, adjust, pause, resume</p>
+            </div>
+            <div class="wm-docs">
+              <div class="wm-card wm-doc"><b><span class="wm-av" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="15" cy="12" r="5"/><path d="M4.8 28.5a10.2 10.2 0 0 1 20.4 0"/><path class="fillc" d="M9.6 10.6c0-4.4 2.5-7 5.4-7s5.4 2.6 5.4 7z"/><path class="cut" d="M15 5.6v3.4M13.3 7.3h3.4"/></svg></span>Supervising physician</b><span>One per patient.</span></div>
+              <div class="wm-card wm-doc"><b><span class="wm-av" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="15" cy="12" r="5"/><path d="M4.8 28.5a10.2 10.2 0 0 1 20.4 0"/><path class="fillc" d="M9.6 10.6c0-4.4 2.5-7 5.4-7s5.4 2.6 5.4 7z"/><path class="cut" d="M15 5.6v3.4M13.3 7.3h3.4"/><circle class="badge" cx="24.6" cy="23.6" r="5.6"/><path d="M24.6 21v2.8l1.8 1.1"/></svg></span>Covering physicians</b><span>Same rights while the supervisor is away.</span></div>
+            </div>
+            <div class="wm-link wm-d"><p class="to-d">From the server: one row per rehab program</p></div>
+            <div class="wm-card wm-research"><b><span class="wm-av" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="15" cy="12" r="5"/><path d="M4.8 28.5a10.2 10.2 0 0 1 20.4 0"/><circle class="badge" cx="24.6" cy="23.6" r="5.6"/><path d="M22.3 26v-2M24.6 26v-4.3M26.9 26v-3"/></svg></span>Researcher</b><span>Research codes instead of names by default.</span></div>
+          </div>
+          <figcaption>Who sees what. Physicians, in yellow, are the only ones who can approve a plan or resume paused training, and the server enforces it, not the screen.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-sec">
+    <div class="wrap">
+      <h2>Scope</h2>
+      <div class="prose">
+        <p><strong>Version one covers the whole clinical loop,</strong> from assessment to reassessment. The first pilot is planned on hospital iPads shared between patients on site, with home training as the longer-term case. So patients log in with a code their physician hands them, each patient’s data is partitioned on the tablet, and training works offline.</p>
+        <p><strong>Out of scope on purpose:</strong></p>
+        <ul>
+          <li>Prescribing without a physician. The system drafts and never issues.</li>
+          <li>Acting as an emergency channel. Urgent symptoms are directed to emergency services.</li>
+          <li>Replacing the hospital’s record system. Version one stores its own data.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-sec wide">
+    <div class="wrap">
+      <h2>How it works</h2>
+      <div class="flow2" aria-label="ExRxAI workflow">
+        <p class="phase-label">Assess and prescribe</p>
+        <ol class="phase">
+          <li><span class="who">Patient</span><b>Baseline assessment</b><span class="desc">A questionnaire plus a walk test or CPET.</span></li>
+          <li><span class="who">System</span><b>Risk stratification</b><span class="desc">Five criteria, from a formula the partner physician provided. Missing data stays missing.</span></li>
+          <li><span class="who">System</span><b>Draft exercise prescription</b><span class="desc">The patient doesn’t see it yet.</span></li>
+          <li class="human"><span class="who">Physician</span><b>Review and approval</b><span class="desc">Confirms or overrides, with a recorded reason.</span></li>
+        </ol>
+        <p class="phase-label">Train and review</p>
+        <ol class="phase">
+          <li class="human"><span class="who">Patient, every session</span><b>Pre-session symptom check</b><span class="desc">A warning sign pauses training until a physician reviews it.</span></li>
+          <li><span class="who">Patient and tablet</span><b>Guided exercise</b><span class="desc">The tablet counts only reps that meet the standard.</span></li>
+          <li class="human"><span class="who">Physician</span><b>Progress review and reassessment</b><span class="desc">Adjusts the plan as recovery goes.</span></li>
+          <li class="loop"><b>Back to step 1</b><span class="desc">A new plan again needs a physician’s approval.</span></li>
+        </ol>
+        <p class="steps-key">Yellow steps are checkpoints where a patient or physician decides.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-sec">
+    <div class="wrap">
+      <h2>Key decisions</h2>
+      <div class="decisions">
+        <p class="shots-hint">Screenshots are from a development build with fictional test patients. The interface runs in English or Chinese.</p>
+        <article class="decision">
+          <div>
+            <h3>Keep prescriptions in draft until a physician approves them</h3>
+            <p>The risk level and draft prescription come from a formula the partner physician provided, a general method that fits most patients but can’t know what a patient’s own physician knows. So the system does the calculation, saving the physician most of the time a prescription takes, and the physician makes the call. The formula isn’t AI yet, on purpose: without enough data, a model could be wrong in ways no one could check. So the formula calculates, the physician decides, and every override is recorded with its reason. Those overrides are the data a future model will have to beat. Today the product’s one AI model does perception, tracking body movement on the tablet. The server enforces the approval step: in scripted checks against the running API, a patient couldn’t see or edit a draft, an unassigned physician couldn’t confirm it, and a confirmed plan couldn’t be altered.</p>
+          </div>
+          <div class="cost"><b>Trade-off</b><p>Approval adds work for physicians. A single primary action for each review state keeps the process focused.</p></div>
+        <figure class="decision-shot"><img src="images/exrxai-risk.jpg" alt="Patient page showing assessments on the left and a risk card on the right where the physician overrode the system's suggestion" width="800" height="512" loading="lazy"><figcaption>Risk card. The system had data for one criterion of five and suggested low risk. It lists the other four as missing instead of treating them as normal. The physician overrode the level to moderate and recorded why (chest tightness).</figcaption></figure>
+        </article>
+        <article class="decision">
+          <div>
+            <h3>When a rule changes, recompute before anyone signs</h3>
+            <p>The first version of the rules rated any history of heart attack as high risk. Most rehab patients have had one, so nearly everyone came out high risk. In October I narrowed the criterion to complications after revascularization, citing China’s 2020 primary-care rehab guideline and AACVPR 2012. Testing then showed the database still held levels computed under the old rule, so a physician could approve a “low-risk” plan attached to a “high-risk” record. Now a rule change recomputes every stored level, as a new record, and the physician re-confirms before prescribing.</p>
+          </div>
+          <div class="cost"><b>Trade-off</b><p>Physicians look again at patients whose level moved. Built and tested on a branch, not yet merged.</p></div>
+        </article>
+        <article class="decision">
+          <div>
+            <h3>Check symptoms before every session, and stop in one tap during it</h3>
+            <p>Before every session, including a second one the same day, patients answer a required question about warning symptoms such as chest pain or dizziness. A reported symptom pauses training, and only a physician can resume it; the server rejects a resume sent from the tablet. During training, a “Stop · I feel unwell” button ends the session at once, with no confirmation step, and opens a report that already names the exercise.</p>
+          </div>
+          <div class="cost"><b>Trade-off</b><p>Repeated checks add friction, but a check at the start of the day can’t account for changes between sessions. A one-tap stop can be pressed by accident; a lost session costs less than a missed warning sign.</p></div>
+        <figure class="decision-shot"><img src="images/exrxai-prescription.jpg" alt="Patient page showing a training calendar, a symptom report acknowledged by the physician, and the active exercise prescription with doses" width="800" height="512" loading="lazy"><figcaption>Prescription in force, with the test result it rests on, the dose for each exercise, and a palpitations report the physician acknowledged three minutes after it arrived.</figcaption></figure>
+        </article>
+        <article class="decision">
+          <div>
+            <h3>Sort the patient list by what needs a physician</h3>
+            <p>The workbench groups patients into <em>Needs action</em> (paused, a recent symptom, or new information waiting), <em>Needs attention</em> (no sync for 3 days, reassessment due, or fewer than half the prescribed days trained), and <em>No to-dos</em>. Fixed rules can miss things, and testing found one: a test patient’s heart-function value dropped from 45 to 35, the system re-rated them high risk, and the list still showed “no reminders.” A questionnaire change now counts as new information.</p>
+          </div>
+          <div class="cost"><b>Trade-off</b><p>A problem the rules don’t cover won’t raise a flag, so each rule gets a test case both tablet and server must pass. This fix is also awaiting merge.</p></div>
+        <figure class="decision-shot"><img src="images/exrxai-workbench.jpg" alt="Physician workbench listing six test patients in groups, with badges such as no data for 43 days and reassessment 24 days overdue" width="800" height="493" loading="lazy"><figcaption>Workbench. Patients are grouped by what needs the physician. Three sit under “Needs attention”: no data for 43 days, a reassessment 24 days overdue, and 0 of 4 prescribed days trained last week.</figcaption></figure>
+        </article>
+        <article class="decision">
+          <div>
+            <h3>Count only what the tracking can be trusted to count</h3>
+            <p>Each of the 21 exercises has movement criteria set by the prescription, such as joint angle or hold time. Reps that miss them aren’t counted, with a recorded reason and spoken feedback. Pose tracking runs on the tablet, and video never leaves it. Where tracking couldn’t be trusted, I cut scope: after five rounds of on-device testing, heel-raise counts still drifted with camera position, so I shelved the exercise. Five exercises with no quality score yet are left out of the trend line rather than shown as perfect.</p>
+          </div>
+          <div class="cost"><b>Trade-off</b><p>Strict counting can feel discouraging, and physicians lose an exercise they asked for. In exchange, every number on their screen is one the system can stand behind.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-sec">
+    <div class="wrap">
+      <h2>Validation so far</h2>
+      <div class="prose">
+        <p><strong>How I’d judge it:</strong> three numbers the patient registry already reports for each 12-week program. Completion rate, change in exercise capacity from baseline to the closing assessment, and the count of symptom reports and physician-ordered pauses. A pilot would set the baseline. Until then, the evidence below is about whether the system works as designed.</p>
+        <p><strong>1,602 automated tests pass</strong> (1,019 on the tablet, 583 on the server, full run on October 19, 2026). Because training works offline, both sides evaluate the status rules, and shared test cases keep them in step: 69 on the main branch, 91 with the pending rule change.</p>
+        <p><strong>A staged test found three defects.</strong> I checked every clinical number in the PRD against the code, traced how each screen uses the shared rules, then ran 61 scripted checks against the live API, 28 of them with timestamps shifted to simulate weeks passing. Two defects are described above. The third is open: a pause reaches the tablet, but a training page that is already open doesn’t refresh.</p>
+        <p><strong>Counting accuracy isn’t measured yet.</strong> Each exercise was tuned on an iPad until it behaved, but not logged as numbers. The protocol is written (ten reps to standard, five below, three too fast), with a target of at most one valid rep in ten missed and no bad rep counted. It needs a person and the one test iPad.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-sec">
+    <div class="wrap">
+      <h2>What I learned</h2>
+      <div class="prose">
+        <p><strong>The defects that mattered sat at seams, not in formulas:</strong> a correct rule one screen didn’t consult, or a stored result that outlived its rule. So every status rule now lives in one place, with test cases both the tablet and the server must pass.</p>
+        <p><strong>Operations fail more quietly than code.</strong> Twice a changed network address left training data sitting on an iPad, for five days and then three, before anyone noticed. That is why “no sync for 3 days” is on the physician’s workbench.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-sec">
+    <div class="wrap">
+      <h2>Before a pilot</h2>
+      <div class="prose">
+        <p>In healthcare, what blocks a pilot is rarely a missing feature.</p>
+        <ul>
+          <li><strong>Clinical rules for unresolved cases,</strong> such as how to proceed when most risk data is missing.</li>
+          <li><strong>Reliable pauses:</strong> fix the open defect and add push notifications, so a pause reaches an idle tablet.</li>
+          <li><strong>Deployment and backups:</strong> a hospital-hosted server, with restores verified. There are no backups today, which alone rules out real patient data.</li>
+          <li><strong>Data and regulation:</strong> the server stores structured results only, records are append-only, and every access is logged. What else the hospital requires is a question for the pilot site.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-sec">
+    <div class="wrap">
+      <h2>Where AI comes next</h2>
+      <div class="prose">
+        <p><strong>AI earns each new job by evidence, one step at a time.</strong> The first steps are ones where a person still checks every output.</p>
+        <div class="next-grid">
+          <div class="next-card">
+            <span class="when">First · a person checks every output</span>
+            <b>Read test reports</b>
+            <p>Pull heart-function values from echo, CPET, and discharge reports, each shown beside its source, for the physician to confirm. It targets the missing data on the risk card, and the model must run in-country or on hospital servers.</p>
+          </div>
+          <div class="next-card">
+            <span class="when">First · built from structured data</span>
+            <b>A weekly summary per patient</b>
+            <p>A few sentences on training, quality, and symptoms, each linked to the records it came from, so the physician reads less and nothing can be invented.</p>
+          </div>
+          <div class="next-card stays">
+            <span class="when">Always</span>
+            <b>Stays with the physician</b>
+            <p>Approving a plan, pausing or resuming training, and reading every symptom report. AI can suggest; it never decides or filters.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="next-case">
+    <div class="wrap"><span class="kicker">Next case study</span><br><a href="inlicense.html">InLicense: AI research that waits for a person to decide</a></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 Fanghui Xiao</span>
+    <a href="index.html">Home</a>
+  </div>
+</footer>
+<script>
+/* Open case pages at the top, even inside an embedding frame that keeps its scroll position. */
+if (!location.hash) {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.addEventListener('load', function () { document.documentElement.scrollIntoView({ block: 'start' }); window.scrollTo(0, 0); });
+}
+</script>
+<script>
+/* Section menu: built from each case-study section's heading. */
+(function () {
+  var secs = [].slice.call(document.querySelectorAll('section.case-sec')).filter(function (s) { return s.querySelector('h2'); });
+  var top = document.querySelector('.case-top');
+  if (secs.length < 3 || !top) return;
+  document.body.classList.add('has-toc');
+  var bar = document.createElement('nav');
+  bar.className = 'toc-bar'; bar.setAttribute('aria-label', 'On this page');
+  bar.innerHTML = '<div class="wrap"><div class="toc-row"><span class="toc-label">On this page</span><button type="button" class="toc-btn" aria-expanded="false"><span class="toc-cur"></span><span class="toc-caret" aria-hidden="true">&#9662;</span></button></div><ul class="toc-list"></ul></div><span class="toc-progress" aria-hidden="true"></span>';
+  var btn = bar.querySelector('.toc-btn'), cur = bar.querySelector('.toc-cur'), list = bar.querySelector('.toc-list'), prog = bar.querySelector('.toc-progress');
+  var links = secs.map(function (s) {
+    var t = s.querySelector('h2').textContent.trim();
+    if (!s.id) s.id = t.toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    var li = document.createElement('li'), a = document.createElement('a');
+    a.href = '#' + s.id; a.textContent = t; li.appendChild(a); list.appendChild(li);
+    a.addEventListener('click', function () { setOpen(false); });
+    return a;
+  });
+  document.body.appendChild(bar);
+  function setOpen(o) { bar.classList.toggle('open', o); btn.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  btn.addEventListener('click', function () { setOpen(!bar.classList.contains('open')); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+  document.addEventListener('click', function (e) { if (!bar.contains(e.target)) setOpen(false); });
+  function update() {
+    var show = top.getBoundingClientRect().bottom < 0;
+    bar.classList.toggle('show', show);
+    if (!show) setOpen(false);
+    var idx = 0;
+    secs.forEach(function (s, i) { if (s.getBoundingClientRect().top < 120) idx = i; });
+    cur.textContent = links[idx].textContent;
+    links.forEach(function (a, i) { a.setAttribute('aria-current', i === idx ? 'true' : 'false'); });
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (max > 0 ? Math.min(100, window.scrollY / max * 100) : 0) + '%';
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
+</body>
+</html>
