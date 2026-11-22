@@ -942,3 +942,26 @@ h1.statement { max-width: 15ch; font-size: clamp(2.3rem, 1.3rem + 3.2vw, 3.9rem)
 .decision-more summary { cursor: pointer; font-family: var(--sans); font-size: var(--t-sm); font-weight: 700; color: var(--ink); padding: 8px 0; }
 .decision-more summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-radius: 4px; }
 .decision-more[open] summary { margin-bottom: 8px; }
+
+/* Funnel table on the InLicense case study */
+.funnel-wrap { overflow-x: auto; margin: 6px 0 18px; }
+.funnel { width: 100%; border-collapse: collapse; font-size: var(--t-sm); font-variant-numeric: tabular-nums; }
+.funnel th, .funnel td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.funnel thead th { font-weight: 600; color: var(--ink-soft); }
+.funnel tbody th { font-weight: 600; white-space: nowrap; }
+.funnel td:nth-child(2), .funnel td:nth-child(3), .funnel td:nth-child(4), .funnel td:nth-child(5) { font-weight: 700; }
+.also-built { margin-top: 8px; }
+.also-built > .decision { margin-top: 16px; }
+.agent-run { margin-top: 22px; }
+
+.prose.agent-run p { max-width: none; }
+
+@media (max-width: 640px) {
+  .funnel thead { display: none; }
+  .funnel, .funnel tbody, .funnel tr, .funnel th, .funnel td { display: block; width: 100%; }
+  .funnel tr { border: 1px solid var(--rule); border-radius: 12px; padding: 6px 14px; margin-bottom: 12px; background: var(--surface); }
+  .funnel tbody th { border-bottom: 1px solid var(--rule); padding: 10px 0; }
+  .funnel td { display: flex; justify-content: space-between; gap: 16px; padding: 7px 0; border-bottom: 0; }
+  .funnel td::before { content: attr(data-label); font-weight: 400; color: var(--ink-soft); }
+  .funnel td:last-child { flex-direction: column; gap: 2px; font-weight: 500; }
+}

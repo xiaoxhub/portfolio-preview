@@ -2,7 +2,6 @@
 <html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>InLicense | Fanghui Xiao</title>
 <meta name="description" content="Case study: InLicense, an AI workbench for cross-border pharma in-licensing with evidence-backed drafts and human review.">
@@ -30,15 +29,15 @@
       <div class="case-intro">
         <a class="back" href="index.html#work">Back to all work</a>
         <h1>InLicense</h1>
-        <p class="lead">An AI-assisted workbench for cross-border pharma business development. It finds candidate products, lays out the evidence for each screening rule, and drafts evaluations and first-contact emails, so the BD can spend more time assessing opportunities, building relationships, and moving partnerships forward.</p>
+        <p class="lead">In plain terms: I scouted drugs and devices approved in the US for introduction into hospitals in China, and contacted the companies that make them. InLicense is the AI-assisted workbench I built for that business development (BD) work. It finds candidate products, lays out the evidence for each screening rule, and drafts evaluations and first-contact emails, so the BD can spend more time assessing opportunities, building relationships, and moving partnerships forward.</p>
       </div>
       <aside class="summary" aria-label="Summary">
         <h2>In 30 seconds</h2>
         <dl>
           <dt>Problem</dt><dd>Research and outreach preparation took hours per candidate, and roughly 30% were ruled out only after substantial research, leaving little time for partner development.</dd>
-          <dt>My role</dt><dd>BD practitioner, product manager, and builder: defined the requirements, designed the workflow, and built the tool around my own research process.</dd>
-          <dt>Initial test</dt><dd>One unattended run generated preliminary evaluations and first-contact email drafts for 20 products that met the system’s screening criteria, in about 30 minutes. I then reviewed all 20 against their cited sources and found no factual errors in this batch. Every contact included a source link.</dd>
-                    <dt>Stage</dt><dd><span class="chip go">Working prototype</span> Tested on real candidates and used for several days, after about six weeks of doing the job by hand. Email sending was tested end to end; live outreach has not started.</dd>
+          <dt>My role</dt><dd>As a contract business development consultant, I was also the product manager and builder: I defined the requirements, designed the workflow, and built the tool around my own research process.</dd>
+          <dt>Timed test</dt><dd>On real candidates, the agent ran unattended for 34 minutes: it screened 18 products, held back 8 with a recorded reason, and prepared an evaluation, a sourced contact, and a first email for the other 10. I reviewed each of the 10 in about 20 minutes, then the 8 held back. I changed two calls: I excluded one that passed every rule, and restored one the agent couldn’t verify, to confirm with the company directly.</dd>
+                    <dt>Stage</dt><dd><span class="chip go">Working prototype</span> Six weeks of scouting by hand (September to mid-October 2026), three days to build and debug the workbench, then two batches on real candidates: October 14 and a timed run on November 21. Email sending was tested end to end; live outreach has not started.</dd>
         </dl>
       </aside>
     </div>
@@ -49,8 +48,7 @@
       <h2>The problem</h2>
       <div class="prose problem">
         <p class="problem-lead">Research and outreach preparation took hours per candidate, and roughly 30% were ruled out only after substantial research.</p>
-        <p class="problem-note">The 30% is my own estimate from the candidates I researched by hand, not a formal count.</p>
-        <p class="problem-context">My BD role focused on identifying innovative medicines and medical devices for potential introduction into hospitals in Hainan’s Boao Lecheng Pilot Zone, and making first contact with the companies behind them. For my scouting work, candidates needed to:</p>
+        <p class="problem-context">As a contract BD consultant, my work focused on identifying innovative medicines and medical devices for potential introduction into hospitals in Hainan’s Boao Lecheng Pilot Zone, and making first contact with the companies behind them. For my scouting work, candidates needed to:</p>
         <ul class="problem-context">
           <li>Be approved overseas.</li>
           <li>Not yet be registered in mainland China.</li>
@@ -58,6 +56,7 @@
           <li>Address an unmet clinical need in China.</li>
           <li>Come from a company headquartered in the US or Canada (my assigned market).</li>
         </ul>
+        <p class="problem-context">In the workbench these become three rules. Overseas approval is built in, because the search starts from FDA approval lists, and the two China checks (registration and existing deals) merge into one rule.</p>
         <h3 class="problem-sub">Where the time went</h3>
         <p>Finding candidates meant reviewing approval lists, newsletters, and industry news. The initial mainland registration check was quick. Establishing product-specific China rights, clinical fit, and commercial viability took longer, and disqualifying information often surfaced late: a mainland partner already covering the product, or too few patients in China for it to be viable.</p>
         <p>Candidates that passed still required a detailed evaluation, sourced contact information, and a tailored first email. Much of that work had to be repeated for each product, and it took even longer for someone new to the field.</p>
@@ -93,7 +92,6 @@
           <li><strong>BD professionals new to the field</strong> who need a structured way to check deal-breakers before investing time in a full evaluation.</li>
           <li><strong>BD managers</strong> who need visibility into pipeline progress and completed work without asking the team to reconstruct weekly or monthly updates from memory.</li>
         </ul>
-        <p class="problem-note">These are the intended users. So far, the only person who has used it is me.</p>
       </div>
     </div>
   </section>
@@ -131,7 +129,7 @@
         <p class="phase-label">Find and screen, in the background</p>
         <ol class="phase">
           <li><span class="who">BD</span><b>Start a batch</b><span class="desc">Asks for a batch, such as “find 10 products,” or names one product, then goes back to other work.</span></li>
-          <li><span class="who">AI</span><b>Research and de-duplicate</b><span class="desc">Searches FDA approval lists, rare-disease news, and company press releases, then removes duplicates.</span></li>
+          <li><span class="who">AI</span><b>Research and de-duplicate</b><span class="desc">Searches FDA novel drug and biologics approvals, the Breakthrough Devices list, and company press releases, then removes anything already in the workbench.</span></li>
           <li><span class="who">AI</span><b>Check eligibility</b><span class="desc">Tests each candidate against the screening rules, with a source for every verdict. Missing evidence stops it too, but it is marked unverified and listed for the BD to review.</span></li>
           <li><span class="who">AI</span><b>Score candidates for prioritization</b><span class="desc">Rates each candidate that passes, with the evidence behind each score, to help decide whom to research and contact first.</span></li>
         </ol>
@@ -143,13 +141,17 @@
           <li class="loop end"><b>Logged automatically</b><span class="desc">Product, email, and pipeline records feed funnel counts and the weekly and monthly reports.</span></li>
         </ol>
         <p class="steps-key">Yellow steps are checkpoints where a person decides.</p>
-        <p class="built-with">Built with Claude skills and Claude Code, on SQLite with Prisma; email is sent over SMTP.</p>
+        <div class="prose agent-run">
+          <h3 class="problem-sub">What one batch actually does</h3>
+          <p>The agent runs in Claude Code from written specifications: the screening rules, an email guide, company materials, and instructions for writing to the workbench. It backs up the database, de-duplicates against existing products, and works through candidates one at a time. At the end it checks that every passed product is complete and summarizes what it held back and what it wants checked.</p>
+          <p class="built-with">Built with Claude skills and Claude Code, on SQLite with Prisma; email is sent over SMTP.</p>
+        </div>
         <figure class="demo-video">
           <p class="demo-label">Workflow demo, fictional data</p>
           <video controls muted playsinline preload="none" width="1280" height="1012" poster="images/inlicense-find-products-poster.jpg" aria-describedby="find-video-desc">
             <source src="images/inlicense-find-products.mp4" type="video/mp4">
           </video>
-          <figcaption id="find-video-desc">A 55-second workflow demo using fictional data, in the demo build (working name Nova BD). It illustrates batch setup, screening, evaluation, outreach preparation, and human review; it does not perform live product research. Playback is accelerated to 2.5×, with pauses trimmed. The real-candidate test is reported under Initial workflow validation.</figcaption>
+          <figcaption id="find-video-desc">A 55-second workflow demo using fictional data, in the demo build (working name Nova BD). It illustrates batch setup, screening, evaluation, outreach preparation, and human review; it does not perform live product research. Playback is accelerated to 2.5×, with pauses trimmed. The real-candidate test is reported under Testing on real candidates.</figcaption>
         </figure>
       </div>
       <figure class="vig vig-wide" data-vig="gates">
@@ -181,6 +183,29 @@
         <p class="shots-hint">Screenshots are from the demo build; every company, product, and record shown is fictional. Select a screenshot to see it larger.</p>
         <article class="decision">
           <div>
+            <h3>Check deal-breakers before detailed evaluation</h3>
+            <p>For this version, I encoded the screening requirements used in my BD work. They are this project’s strategy, not Lecheng’s general entry rules. A candidate moves on to detailed evaluation only if it passes all three:</p>
+            <ul class="rule-list">
+              <li>Headquarters in the US or Canada, my assigned market.</li>
+              <li>No mainland China entity, partner, or registration for the product.</li>
+              <li>Innovative, or treating a rare disease. A rare-disease product must also reach a China prevalence of at least 1 in 100,000, even if it is innovative. Prevalence is a simplified stand-in for reachable patients, not a market sizing.</li>
+            </ul>
+            <p>The rules came from a senior colleague, plus a few I learned by hitting dead ends and then confirmed with them. Written into the system, they no longer depend on what someone remembers to pass on. The evidence for each verdict is separate: company websites, SEC filings, partnership announcements, and China registration and trial records, each with a check date.</p>
+            <p>When the evidence can’t be found, the candidate is held back like a fail, but marked unverified and listed separately for review. That blocks automatic progression; it does not mean the candidate has been shown not to qualify. In the timed run this held back two devices: in each case a China-active investor or a past China distribution deal might cover the product, and public sources couldn’t settle it. On review I agreed with the reasoning but restored one of the two, because the right next step was to ask the company, which is why unverified candidates stay visible. To scout a different market, only the region rule changes.</p>
+          </div>
+          <div class="cost"><b>Trade-off</b><p>I prioritized avoiding unsupported passes before investing in detailed evaluation and outreach. This can hold back suitable candidates when public information is incomplete, so unverifiable cases remain visible for manual review.</p></div>
+          <figure class="decision-shot"><a class="zoom" href="images/inlicense-product.png"><img src="images/inlicense-product.png" width="1322" height="578" loading="lazy" alt="InLicense product page for a fictional drug: three screening criteria, each checked with its evidence and a check date, beside the evaluation summary."></a><figcaption>Each rule is checked with its evidence and a date; all three must pass before a detailed evaluation.</figcaption></figure>
+          <details class="decision-more"><summary>After screening: how candidates that pass are scored</summary><figure class="decision-shot"><a class="zoom" href="images/inlicense-evaluation.png"><img src="images/inlicense-evaluation.png" width="1296" height="712" loading="lazy" alt="InLicense detailed evaluation: seven weighted criteria, each with a score from 1 to 5 and a one-line reason, giving an overall score of 4.03."></a><figcaption>Only candidates that pass all three rules get the detailed evaluation: seven weighted criteria, each with a one-line reason, so the overall score can be checked rather than taken on trust. The score helps decide whom to research and contact first.</figcaption></figure></details>
+        </article>
+        <article class="decision">
+          <div>
+            <h3>Pay for the stronger model where a miss is costly</h3>
+            <p>Claude Sonnet 5.5 would cost about half as much. On three test candidates it matched Opus on clear-cut exclusions, but missed an indirect clue (whether an investor held the China rights) and tended to treat “couldn’t find a China deal” as “no China deal.” That errs toward passing a candidate, the exact mistake my unverified rule blocks, so the batch runs on Claude Opus 5.5.</p>
+          </div>
+          <div class="cost"><b>Trade-off</b><p>About twice the cost per package, about $1 instead of $0.50. Three samples is a small test.</p></div>
+        </article>
+        <article class="decision">
+          <div>
             <h3>Review every first email; automate routine follow-ups</h3>
             <p>Every first email, at any priority, waits for the BD to approve it. Automated follow-ups use approved templates and introduce no new product claims. For leads the BD has marked medium or low priority, up to two follow-ups go out from those templates, one week apart, and they stop when a reply is logged, so the BD can take over. If neither gets a reply, the product moves to “Watching” to be revisited later, instead of a third email. High-priority follow-ups come back to the BD for review.</p>
           </div>
@@ -197,22 +222,6 @@
         </article>
         <article class="decision">
           <div>
-            <h3>Check deal-breakers before detailed evaluation</h3>
-            <p>For this version, I encoded the screening requirements used in my BD work. They are this project’s strategy, not Lecheng’s general entry rules. A candidate moves on to detailed evaluation only if it passes all three:</p>
-            <ul class="rule-list">
-              <li>Headquarters in the US or Canada, my assigned market.</li>
-              <li>No mainland China entity, partner, or registration for the product.</li>
-              <li>Innovative, or treating a rare disease. A rare-disease product must also reach a China prevalence of at least 1 in 100,000, even if it is innovative. Prevalence is a simplified stand-in for reachable patients, not a market sizing.</li>
-            </ul>
-            <p>The rules came from a senior colleague, plus a few I learned by hitting dead ends and then confirmed with them. Written into the system, they no longer depend on what someone remembers to pass on. The evidence for each verdict is separate: company websites, SEC filings, partnership announcements, and China registration and trial records, each with a check date.</p>
-            <p>When the evidence can’t be found, the candidate is held back like a fail, but marked unverified and listed separately for review. That blocks automatic progression; it does not mean the candidate has been shown not to qualify. To scout a different market, only the region rule changes.</p>
-          </div>
-          <div class="cost"><b>Trade-off</b><p>I prioritized avoiding unsupported passes before investing in detailed evaluation and outreach. This can hold back suitable candidates when public information is incomplete, so unverifiable cases remain visible for manual review.</p></div>
-          <figure class="decision-shot"><a class="zoom" href="images/inlicense-product.png"><img src="images/inlicense-product.png" width="1322" height="578" loading="lazy" alt="InLicense product page for a fictional drug: three screening criteria, each checked with its evidence and a check date, beside the evaluation summary."></a><figcaption>Each rule is checked with its evidence and a date; all three must pass before a detailed evaluation.</figcaption></figure>
-          <details class="decision-more"><summary>After screening: how candidates that pass are scored</summary><figure class="decision-shot"><a class="zoom" href="images/inlicense-evaluation.png"><img src="images/inlicense-evaluation.png" width="1296" height="712" loading="lazy" alt="InLicense detailed evaluation: seven weighted criteria, each with a score from 1 to 5 and a one-line reason, giving an overall score of 4.03."></a><figcaption>Only candidates that pass all three rules get the detailed evaluation: seven weighted criteria, each with a one-line reason, so the overall score can be checked rather than taken on trust. The score helps decide whom to research and contact first.</figcaption></figure></details>
-        </article>
-        <article class="decision">
-          <div>
             <h3>Generate reports from daily work</h3>
             <p>Weekly and monthly reporting required counts of products found, emails sent, and meetings held. I designed the workbench to reuse the records created during daily work, reducing the need to reconstruct progress at the end of each reporting period.</p>
             <p>Counts come from the product, email, and pipeline records; the activity log adds what happened along the way. The BD sets targets and reviews the commentary, which AI can help draft. A few counting rules keep the numbers honest: an email draft does not count as sent, a product already in the workbench is skipped rather than counted as new, and a pipeline stage counts once, when it is first confirmed.</p>
@@ -220,6 +229,7 @@
           <div class="cost"><b>Trade-off</b><p>Reports reflect only the work recorded in the system. External meetings, calls, and conference activity still require manual entries; missing records leave the report incomplete.</p></div>
           <figure class="decision-shot"><a class="zoom" href="images/inlicense-monthly.png"><img src="images/inlicense-monthly.png" width="1746" height="800" loading="lazy" alt="InLicense monthly report: funnel actuals for each stage filled in from the work record, compared with targets, with a button to draft the commentary with AI."></a><figcaption>The monthly report compares recorded actuals with targets. AI can draft the commentary; the BD reviews and edits it.</figcaption></figure>
         </article>
+        <details class="decision-more also-built"><summary>Also built, not yet used in live outreach: reply analytics and a China market brief</summary>
         <article class="decision">
           <div>
             <h3>Keep exploratory analytics out of automatic drafting</h3>
@@ -239,29 +249,47 @@
           <div class="cost"><b>Trade-off</b><p>Transparent assumptions give the partner specific inputs to question, but preparing a usable brief still requires source checks, hospital input, and manual review.</p></div>
           <figure class="decision-shot"><a class="zoom" href="images/inlicense-market-brief.png"><img src="images/inlicense-market-brief-top.png" width="868" height="930" loading="lazy" alt="China market brief for a fictional rare-disease therapy: why China now, product facts, an illustrative hospital profile, and a first-year volume estimate built from four editable assumptions, with conservative, base-case, and upside scenarios."></a><figcaption>The top of the brief, for a fictional product. Estimate inputs are editable assumptions; the hospital profile is labeled illustrative, and policy statements are marked for source checks. Select it to see the full page, including the timeline and who does what.</figcaption></figure>
         </article>
-        <article class="decision">
-          <div>
-            <h3>Language and display options</h3>
-            <p>The interface supports Chinese and English, with a choice of playful and professional themes.</p>
-          </div>
-          <div class="cost"><b>Trade-off</b><p>These options add maintenance and testing work: each screen needs to be checked across four language-and-theme combinations.</p></div>
-        <div class="decision-shot shot-pair"><figure><a class="zoom" href="images/inlicense-home-playful.png"><img src="images/inlicense-home-playful.png" width="1757" height="982" loading="lazy" alt="The same InLicense home page in the playful theme."></a><figcaption>Playful theme</figcaption></figure><figure><a class="zoom" href="images/inlicense-home-pro.png"><img src="images/inlicense-home-pro.png" width="1754" height="1065" loading="lazy" alt="The same InLicense home page in the professional theme."></a><figcaption>Professional theme</figcaption></figure></div>
-        </article>
+        <p class="problem-note">The interface also supports Chinese and English, in playful and professional themes.</p>
+        </details>
       </div>
     </div>
   </section>
 
   <section class="case-sec">
     <div class="wrap">
-      <h2>Initial workflow validation</h2>
+      <h2>Testing on real candidates</h2>
       <div class="prose">
-        <div class="figures two">
-          <div class="figure-n"><strong>20</strong><span>candidate packages: twenty products met the system’s screening criteria in one run, each with a preliminary evaluation and a first-contact email draft.</span></div>
-          <div class="figure-n"><strong>~30 min</strong><span>of unattended processing: the automated batch completed in about half an hour.</span></div>
+        <div class="figures">
+          <div class="figure-n"><strong>34 min</strong><span>unattended, with no questions to me: 18 real candidates screened, 10 prepared for outreach.</span></div>
+          <div class="figure-n"><strong>~20 min</strong><span>of my review per prepared candidate, against 1 to 2 hours when I research one at a time, even with AI help.</span></div>
+          <div class="figure-n"><strong>2 of 18</strong><span>calls changed in my review: one pass overruled, one held-back candidate restored.</span></div>
         </div>
-        <p><strong>Review scope.</strong> I checked all 20 products that passed screening against their cited sources and found no factual errors in this batch; every contact included a source link. I also briefly reviewed those that did not pass. Manual review time was not recorded, so net time savings have not yet been measured.</p>
-        <p><strong>What this establishes.</strong> One batch on real candidates completed the workflow from discovery through outreach preparation. Email sending was tested end to end, but no drafts have been sent to prospective partners.</p>
-        <p><strong>Limits.</strong> The candidates set aside were reviewed only briefly, not checked against sources one by one, and this was a single batch. It does not yet establish overall screening accuracy.</p>
+        <h3 class="problem-sub">Two batches, same pattern</h3>
+        <div class="funnel-wrap">
+        <table class="funnel">
+          <thead><tr><th scope="col">Batch</th><th scope="col">Candidates recorded</th><th scope="col">Passed screening</th><th scope="col">Failed, with a reason</th><th scope="col">Unverified, held for review</th><th scope="col">Result</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Oct 14, 2026</th><td data-label="Candidates recorded">22</td><td data-label="Passed screening">12</td><td data-label="Failed, with a reason">9</td><td data-label="Unverified, held for review">1</td><td data-label="Result">2 more set aside after evaluation; 10 email drafts</td></tr>
+            <tr><th scope="row">Nov 21, 2026 (timed)</th><td data-label="Candidates recorded">18</td><td data-label="Passed screening">10</td><td data-label="Failed, with a reason">6</td><td data-label="Unverified, held for review">2</td><td data-label="Result">10 complete packages. After my review: 9 ready, 1 excluded, 1 held-back device restored</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p>Both batches passed a little over half of what they recorded. Fails had specific reasons: China rights already licensed or China trials under way, a non-US acquirer, a similar product already approved in China, or too few patients.</p>
+
+        <h3 class="problem-sub">Time and cost</h3>
+        <p>Done one at a time, even with AI help, a candidate takes me 1 to 2 hours. In the batch, my hands-on time was the review, about 20 minutes each. At API prices the run cost about $1 per complete package, counting the candidates it screened out; on a Claude subscription there is no separate charge.</p>
+
+        <h3 class="problem-sub">What my review changed</h3>
+        <p>I changed two of 18 calls. I excluded a very large drugmaker that passed every rule: it takes partnering requests only through a web form, refuses distribution requests, and licenses whole programs to large partners in China. I restored a device held back as unverified, because the open question, whether an investor held Asian rights, was best answered by asking the company.</p>
+        <p>The agent also fell short once: it dropped a candidate whose China-rights check wasn’t finished instead of recording it as unverified. It did flag one figure in a draft email for me to verify.</p>
+
+        <h3 class="problem-sub">What this does and doesn’t prove yet</h3>
+        <ul>
+          <li>Only I have used it: two batches, one of them timed.</li>
+          <li>I reviewed the 10 prepared candidates in depth and the 8 held back more briefly.</li>
+          <li>The 1-to-2-hour baseline, the 30% late-disqualification figure, and the cost are my estimates.</li>
+          <li>No email has gone to a prospective partner. Screenshots and the demo video use fictional data.</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -271,6 +299,7 @@
       <h2>What I learned</h2>
       <div class="prose">
         <p><strong>Automation needs explicit decision boundaries.</strong> Turning BD screening experience into repeatable checks was only part of the work. I also had to define when missing evidence should stop progression, which messages required approval, and which outreach patterns were too uncertain to influence future drafts.</p>
+        <p><strong>Rules catch deal-breakers; judgment catches dead ends.</strong> The product I excluded passed every written rule. What made it a poor lead was how that company partners, which is a pattern a BD learns, not a fact a screen checks. The useful move is to have the agent surface that pattern as a flag for the BD rather than turn it into an automatic fail.</p>
         <p><strong>Optimize the whole workflow, including review.</strong> Using the tool for my own job made the remaining work visible: generated evaluations and drafts still needed checking. That kept my attention on total hands-on effort, rather than output volume alone. My own usage provided immediate feedback, but broader usefulness still needs testing with other BD professionals.</p>
       </div>
     </div>
@@ -281,10 +310,12 @@
       <h2>What I’d do next</h2>
       <div class="prose">
         <ul>
-          <li><strong>Measure the next batch.</strong> Record research, review, and editing time against a comparable manual workflow. Apply consistent checks to both advanced and set-aside candidates, building on the quicker review of rejected candidates in the first test.</li>
-          <li><strong>Test with another BD professional.</strong> Observe whether they can understand the screening decisions, verify the evidence, and prepare outreach without relying on my explanations.</li>
-          <li><strong>Prepare a small live outreach pilot.</strong> Add a do-not-contact flag and contact-level frequency limits across products, then test a limited batch of individually approved first emails.</li>
-          <li><strong>Turn recurring edits into test cases.</strong> Use logged corrections to improve templates and check whether future outputs repeat the same problems.</li>
+          <li><strong>Close the missing-record gap.</strong> Any candidate whose screening isn’t finished is written to the workbench as unverified. Done when a test batch accounts for every candidate it researched.</li>
+          <li><strong>Flag partnering patterns.</strong> Add a check for how a company partners in China and whether it takes outside approaches, shown to the BD as a flag, not a fail.</li>
+          <li><strong>Re-test the model choice at batch scale.</strong> Run a full batch on both Opus and Sonnet and count China-rights verdicts each gets wrong against my review, especially passes on missing evidence. Switch only if the smaller model misses none.</li>
+          <li><strong>Time a manual baseline.</strong> Research two comparable candidates by hand with a timer, so time saved is measured rather than estimated.</li>
+          <li><strong>Test with another BD professional.</strong> Done when they can follow the screening decisions and verify the evidence without my explanations.</li>
+          <li><strong>Run a small live pilot.</strong> First add a do-not-contact flag, contact-level frequency limits, and an opt-out line for anti-spam rules. Then send about 10 individually approved first emails and track replies over 21 days.</li>
           <li><strong>Later, schedule a daily batch,</strong> so screened candidates are ready at the start of the day.</li>
         </ul>
       </div>
