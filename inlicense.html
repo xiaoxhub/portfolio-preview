@@ -35,9 +35,9 @@
       <aside class="summary" aria-label="Summary">
         <h2>In 30 seconds</h2>
         <dl>
-          <dt>Problem</dt><dd>Research and outreach preparation took hours per candidate, and roughly 30% were ruled out only after substantial research, leaving little time for partner development.</dd>
+          <dt>Problem</dt><dd>Research and outreach preparation took hours per candidate, and I estimate that roughly 30% were ruled out only after substantial research, leaving little time for partner development.</dd>
           <dt>My role</dt><dd>As a contract business development (BD) consultant, I was also the product manager and builder: I defined the requirements, designed the workflow, and built the tool around my own research process.</dd>
-          <dt>Timed test</dt><dd>On real candidates, the agent ran unattended for 34 minutes and recorded screening decisions for 18 products: 10 prepared with an evaluation, a sourced contact, and a first email, and 8 held back with a recorded reason. My review took about 20 minutes per prepared candidate, plus a quicker pass over the 8 held back. I changed two calls: I excluded one that passed every rule, and restored one the agent couldn’t verify, to confirm with the company directly.</dd>
+          <dt>Timed test</dt><dd>In 34 unattended minutes, InLicense recorded screening decisions for 18 products and prepared evaluations, sourced contacts, and email drafts for 10. I spent about 20 minutes reviewing each of those 10 and briefly checked the eight held back. I changed two decisions.</dd>
                     <dt>Stage</dt><dd><span class="chip go">Working prototype</span> Six weeks of scouting by hand (September to mid-October 2026), three days to build and debug the workbench, then two batches on real candidates: October 14 and a timed run on November 21. Email sending was tested end to end; live outreach has not started.</dd>
         </dl>
       </aside>
@@ -53,11 +53,11 @@
         <ul class="problem-context">
           <li>Be approved overseas.</li>
           <li>Not yet be registered in mainland China.</li>
-          <li>Have no existing mainland China licensing or distribution arrangement covering the product.</li>
+          <li>Come from a manufacturer without its own mainland China subsidiary, and have no existing partner handling licensing or distribution of the product there.</li>
           <li>Address an unmet clinical need in China.</li>
           <li>Come from a company headquartered in the US or Canada (my assigned market).</li>
         </ul>
-        <p class="problem-context">In the workbench these become three rules. Overseas approval is built in, because the search starts from FDA approval lists, and the two China checks (registration and existing deals) merge into one rule.</p>
+        <p class="problem-context">In the workbench these become three rules. Overseas approval is checked first: a candidate needs an FDA approval or marketing authorization confirmed from an FDA source, with its date and number, before the other rules apply, and the China checks (registration, subsidiary, and existing partners) merge into one rule.</p>
         <h3 class="problem-sub">Where the time went</h3>
         <p>Finding candidates meant reviewing approval lists, newsletters, and industry news. The initial mainland registration check was quick. Establishing product-specific China rights, clinical fit, and commercial viability took longer, and disqualifying information often surfaced late: a mainland partner already covering the product, or too few patients in China for it to be viable.</p>
         <p>Candidates that passed still required a detailed evaluation, sourced contact information, and a tailored first email. Much of that work had to be repeated for each product, and it took even longer for someone new to the field.</p>
@@ -104,7 +104,7 @@
         <p>Version one supports product scouting, outreach, and progress reporting.</p>
         <h3 class="problem-sub">Core workflow</h3>
         <ul>
-          <li>Discover, screen, and evaluate products against three go/no-go rules (US or Canada headquarters; no mainland China entity, partner, or registration; enough innovation or patient need), with the evidence for each verdict.</li>
+          <li>Discover, screen, and evaluate products against three go/no-go rules (US or Canada headquarters; no mainland China registration, subsidiary, or partner handling the product; enough innovation or patient need), with the evidence for each verdict.</li>
           <li>Find contacts, draft first-contact emails, and manage routine follow-ups.</li>
           <li>Generate weekly and monthly reports from recorded work, available as text or exported to the company’s PowerPoint template.</li>
         </ul>
@@ -130,7 +130,7 @@
         <p class="phase-label">Find and screen, in the background</p>
         <ol class="phase">
           <li><span class="who">BD</span><b>Start a batch</b><span class="desc">Asks for a batch, such as “find 10 products,” or names one product, then goes back to other work.</span></li>
-          <li><span class="who">AI</span><b>Research and de-duplicate</b><span class="desc">Searches FDA novel drug and biologics approvals, the Breakthrough Devices list, and company press releases, then removes anything already in the workbench.</span></li>
+          <li><span class="who">AI</span><b>Research and de-duplicate</b><span class="desc">Searches FDA novel drug and biologics approvals and FDA device authorizations, including the list of breakthrough devices with marketing authorization, then removes anything already in the workbench.</span></li>
           <li><span class="who">AI</span><b>Check eligibility</b><span class="desc">Tests each candidate against the screening rules, with a source for every verdict. Missing evidence stops it too, but it is marked unverified and listed for the BD to review.</span></li>
           <li><span class="who">AI</span><b>Score candidates for prioritization</b><span class="desc">Rates each candidate that passes, with the evidence behind each score, to help decide whom to research and contact first.</span></li>
         </ol>
@@ -161,7 +161,7 @@
                   <svg viewBox="0 0 520 236" role="img" aria-label="Candidate products pass three screening rules. One that could not be verified is set aside for a person to check.">
                     <line class="cv-track" x1="14" y1="118" x2="408" y2="118"></line>
                     <g class="cv-gate"><line x1="140" y1="86" x2="140" y2="150"></line><text x="140" y="72" text-anchor="middle">US or Canada</text></g>
-                    <g class="cv-gate"><line x1="250" y1="86" x2="250" y2="150"></line><text x="250" y="58" text-anchor="middle"><tspan x="250">No China deal</tspan><tspan x="250" dy="14">and partner</tspan></text></g>
+                    <g class="cv-gate"><line x1="250" y1="86" x2="250" y2="150"></line><text x="250" y="58" text-anchor="middle"><tspan x="250">China rights</tspan><tspan x="250" dy="14">still open</tspan></text></g>
                     <g class="cv-gate"><line x1="360" y1="86" x2="360" y2="150"></line><text x="360" y="72" text-anchor="middle">Innovative enough</text></g>
                     <rect class="cv-bin" x="412" y="86" width="96" height="64" rx="12"></rect>
                     <text class="cv-binlabel" x="460" y="72" text-anchor="middle">Passed</text>
@@ -188,10 +188,10 @@
             <p>For this version, I encoded the screening requirements used in my BD work. They are this project’s strategy, not Lecheng’s general entry rules. A candidate moves on to detailed evaluation only if it passes all three:</p>
             <ul class="rule-list">
               <li>Headquarters in the US or Canada, my assigned market.</li>
-              <li>No mainland China entity, partner, or registration for the product.</li>
+              <li>Not yet registered in mainland China, from a manufacturer with no mainland subsidiary, and with no existing partner handling licensing or distribution for the product there. If I can confirm a partnership but not whether it covers this product, the candidate is flagged for review.</li>
               <li>Innovative, or treating a rare disease. A rare-disease product must also reach a China prevalence of at least 1 in 100,000, even if it is innovative. Prevalence is a simplified stand-in for reachable patients, not a market sizing.</li>
             </ul>
-            <p>The rules came from a senior colleague, plus a few I learned by hitting dead ends and then confirmed with them. Written into the system, they no longer depend on what someone remembers to pass on. The evidence for each verdict is separate: company websites, SEC filings, partnership announcements, and China registration and trial records, each with a check date.</p>
+            <p>My initial training covered three product criteria: overseas approval, no mainland China registration, and a high degree of innovation. After I had researched several candidates, a senior colleague explained why some were unlikely to work for us: a manufacturer could already have its own mainland China subsidiary, or a partner handling the product there. I moved those checks ahead of the full evaluation so I could assess the likelihood of a partnership before spending hours on a lead. Written into the system, they no longer depend on what someone remembers to pass on. The evidence for each verdict is separate: company websites, SEC filings, partnership announcements, and China registration and trial records, each with a check date.</p>
             <p>When the evidence can’t be found, the candidate is held back like a fail, but marked unverified and listed separately for review. That blocks automatic progression; it does not mean the candidate has been shown not to qualify. In the timed run one such candidate was later restored, as described under What my review changed.</p>
           </div>
           <div class="cost"><b>Trade-off</b><p>I prioritized avoiding unsupported passes before investing in detailed evaluation and outreach. This can hold back suitable candidates when public information is incomplete, so unverifiable cases remain visible for manual review.</p></div>
