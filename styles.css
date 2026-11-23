@@ -965,3 +965,6 @@ h1.statement { max-width: 15ch; font-size: clamp(2.3rem, 1.3rem + 3.2vw, 3.9rem)
   .funnel td::before { content: attr(data-label); font-weight: 400; color: var(--ink-soft); }
   .funnel td:last-child { flex-direction: column; gap: 2px; font-weight: 500; }
 }
+
+.case-intro .demo-jump { margin-top: 14px; }
+.case-intro .demo-jump .text-link::after { content: " \2192"; }
